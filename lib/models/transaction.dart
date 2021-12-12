@@ -16,4 +16,8 @@ class Transaction {
   String get readableDate {
     return DateFormat('EEEE d.MMMM yyyy').format(date);
   }
+
+  String get readableAmount {
+    return '${amount.toStringAsFixed(2)}€';
+  }
 }
