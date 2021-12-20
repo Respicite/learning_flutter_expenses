@@ -11,6 +11,8 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // In older Version Expanded seems to not work quit like this so there
+    // one should use the ConstraintBuilder (?)
     return Expanded(
       child: Container(
         child: transactions.isEmpty
@@ -23,6 +25,9 @@ class ExpenseList extends StatelessWidget {
                 ],
               )
             : ListView.builder(
+            // this can actually be scrolled behind the status bar sometimes
+            // use SafeNavigator on the singlechildscrollview or whatever is
+            // scrollable to prevent this from happening
               itemBuilder: (ctx, index) {
                 return ExpenseCard(transactions[index], removeTransaction);
               },

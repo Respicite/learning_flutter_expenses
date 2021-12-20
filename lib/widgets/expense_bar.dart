@@ -33,7 +33,7 @@ class ExpenseBar extends StatelessWidget {
             height: (50*amountPercentage)+1,
             color: Theme.of(context).primaryColorDark,
           ),
-          // alternativley I could use Stack to *stack* two Containers on top
+          // alternatively I could use Stack to *stack* two Containers on top
           // of each other - which would look the same in the final App
           Text(day)
         ],

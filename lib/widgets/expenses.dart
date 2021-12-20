@@ -23,8 +23,18 @@ class _Expenses extends State<Expenses> {
   TextEditingController amountController;
   List<Transaction> transactions;
 
+  bool showChart = false;
+
+  void toggleChart(a){
+    setState(() {
+      showChart == false ? showChart = true : showChart = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    bool portrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     titleController = widget.titleController;
     amountController = widget.amountController;
@@ -34,7 +44,17 @@ class _Expenses extends State<Expenses> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ExpenseChart(transactions: transactions,),
+        portrait ? Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Switch(value: showChart, onChanged: (a) {toggleChart(a);}),
+            // Switch.adaptive uses platform matching styles on widgets where it
+            // is available
+            Switch.adaptive(value: showChart, onChanged: (a) {toggleChart(a);}),
+            Text('Toggle Chart Visibility')
+          ],
+        ) : SizedBox(height: 10,),
+        showChart && portrait ? ExpenseChart(transactions: transactions,) : Container(),
         ExpenseList(transactions: transactions, removeTransaction: widget.removeTransaction),
       ]
     );
